@@ -301,7 +301,7 @@ jobs:
 
       - name: Save Renv package cache
         # don't save cache if we have extra R packages
-        if: ${{ always() && inputs.extra-r-packages == '' }}
+        if: ${{ always() && steps.cache-renv-packages-restore.outputs.cache-hit != 'true' && inputs.extra-r-packages == '' }}
         uses: actions/cache/save@v4
         with:
           path: |
